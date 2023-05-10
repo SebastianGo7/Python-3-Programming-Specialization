@@ -1,4 +1,0 @@
-def first_File():
-    print("This is the first file to determine the programing language of this file")
-
-first_File()
