@@ -6,4 +6,4 @@
 # Turtle Graphics
 # The Way of the Programmer
 
-# Assignments code will be uploaded from this specializations' courses 2-5
+# I will upload the assignments code of this specializations' courses 2-5
