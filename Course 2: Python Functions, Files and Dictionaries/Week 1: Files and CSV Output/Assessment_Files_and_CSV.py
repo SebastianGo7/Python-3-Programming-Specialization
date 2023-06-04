@@ -1,13 +1,14 @@
 
 # University of Michigan
-# Coursera Python 3 Programming Specialization
-# Course 2: Python Functions, Files and Dictionaries:
+# Coursera: Python 3 Programming Specialization
+# Course 2: Python Functions, Files and Dictionaries
 # Week 1: Chapter Files and CSV Output
 # Assessment: Files and CSV
 
 # 1
 # Text file travel_plans.txt is opened and
 # total number of characters is saved.
+
 num = 0
 with open("travel_plans.txt", 'r') as file_travelplans:
 
@@ -35,7 +36,7 @@ with open("school_prompt.txt", 'r') as file_school:
     num_lines = len(lst_text)
 
 # 4
-# Text file school_promt.txt which is a string is opened and
+# Text file school_prompt.txt which is a string is opened and
 # first 30 characters are assigned to a variable.
 
 beginning_chars = ""
@@ -54,7 +55,6 @@ with open("school_prompt.txt", 'r') as file_school:
     for aline in text:
         lst_words = aline.split()
         three.append(lst_words[2])
-
 print(three)
 
 # 6
@@ -62,7 +62,6 @@ print(three)
 # every first word of a line is appended to a list.
 
 emotions = []
-
 with open("emotion_words.txt", 'r') as file_emotions:
     lst_text = file_emotions.readlines()
     for aline in lst_text:
@@ -90,5 +89,5 @@ with open("school_prompt.txt", 'r') as file_school:
     for word in text_lst:
         if "p" in word:
             p_words.append(word)
-
 print(text_lst)
+
