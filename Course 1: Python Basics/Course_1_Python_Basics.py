@@ -1,6 +1,6 @@
 
 # University of Michigan
-# Coursera Python 3 Programming Specialization
+# Coursera: Python 3 Programming Specialization
 # Course 1: Python Basics
 
 # Chapters of this course 1 are:
