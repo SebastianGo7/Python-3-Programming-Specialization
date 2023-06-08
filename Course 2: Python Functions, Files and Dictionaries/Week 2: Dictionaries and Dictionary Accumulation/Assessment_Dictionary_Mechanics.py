@@ -2,7 +2,7 @@
 # University of Michigan
 # Coursera: Python 3 Programming Specialization
 # Course 2: Python Functions, Files and Dictionaries
-# Week 2: Chapter Dictionaries and Dictionary Accumulation
+# Week 2: Dictionaries and Dictionary Accumulation
 # Assessment: Dictionary Mechanics
 
 # 1
