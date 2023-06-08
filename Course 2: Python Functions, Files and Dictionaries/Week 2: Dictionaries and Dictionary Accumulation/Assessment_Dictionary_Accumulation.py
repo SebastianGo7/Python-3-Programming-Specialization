@@ -2,7 +2,7 @@
 # University of Michigan
 # Coursera: Python 3 Programming Specialization
 # Course 2: Python Functions, Files and Dictionaries
-# Week 2: Chapter Dictionaries and Dictionary Accumulation
+# Week 2: Dictionaries and Dictionary Accumulation
 # Assessment: Dictionary Accumulation
 
 # 1
@@ -57,7 +57,8 @@ print(freq_words)
 # A dictionary is created, which includes all words of a string
 # as a key and the value holds the frequency of that word.
 
-sent = "Singing in the rain and playing in the rain are two entirely different situations but both can be good"
+sent = "Singing in the rain and playing in the rain are two entirely" \
+       " different situations but both can be good"
 lst_sent = sent.split()
 wrd_d = {}
 for word in lst_sent:
@@ -127,7 +128,8 @@ for c in string1:
 # Characters should not be counted separately as upper-case and
 # lower-case, instead saved as lower-case characters only.
 
-p = "Summer is a great time to go outside. You have to be careful of the sun though because of the heat."
+p = "Summer is a great time to go outside. You have to be careful of" \
+    " the sun though because of the heat."p_lower = p.lower()
 p_lower = p.lower()
 low_d = {}
 
@@ -136,5 +138,3 @@ for c in p_lower:
         low_d[c] = 0
     low_d[c] += 1
 print(low_d)
-
-
