@@ -56,5 +56,33 @@ students = [('Tommy', 95), ('Linda', 63), ('Carl', 70), ('Bob', 100),
             ('Raymond', 50), ('Sue', 75)]
 passed = [name[0] for name in students if name[1] >= 70]
 
+# 6
+# Zip and filter is used so that these lists (l1 and l2)
+# are combined into one big list and assigned to the variable
+# opposites if they are both longer than 3 characters each.
 
+l1 = ['left', 'up', 'front']
+l2 = ['right', 'down', 'back']
+
+opposites = list(
+    filter(lambda value: (len(value[0]) > 3 and len(value[1])),
+           zip(l1, l2)))
+
+# 7
+# A species list and a population list is provided. Zip is used to
+# combine these lists into one list of tuples called pop_info.
+# From this list, a new list is created called endangered that
+# contains the names of species whose populations are below 2500.
+
+species = ['golden retriever', 'white tailed deer', 'black rhino',
+           'brown squirrel', 'field mouse', 'orangutan',
+           'sumatran elephant', 'rainbow trout', 'black bear',
+           'blue whale', 'water moccasin', 'giant panda',
+           'green turtle', 'blue jay', 'japanese beetle']
+
+population = [10000, 90000, 1000, 2000000, 500000, 500, 1200, 8000,
+              12000, 2300, 7500, 100, 1800, 9500, 125000]
+pop_info = list(zip(species, population))
+endangered = [(x1) for (x1, x2) in list(zip(species, population)) if
+              (int(x2) < 2500)]
 
