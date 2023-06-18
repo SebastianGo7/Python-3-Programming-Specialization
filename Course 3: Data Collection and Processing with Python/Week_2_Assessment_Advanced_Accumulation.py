@@ -46,3 +46,15 @@ first_names = [value[1] for value in people]
 lst = [["hi", "bye"], "hello", "goodbye", [9, 2], 4]
 lst2 = [value * 2 for value in lst]
 
+# 5
+# A list of tuples with students' names and scores is given. List
+# comprehension is used to create a new list passed that contains
+# the names of students who passed the class (had a final grade of
+# 70 or greater).
+
+students = [('Tommy', 95), ('Linda', 63), ('Carl', 70), ('Bob', 100),
+            ('Raymond', 50), ('Sue', 75)]
+passed = [name[0] for name in students if name[1] >= 70]
+
+
+
