@@ -91,3 +91,73 @@ def extract_movie_titles(dict_input):
         names_lst.append(nam["Name"])
     print(names_lst[:5])
     return names_lst[:5]
+
+# 3
+# The completed functions from the previous code windows are copied
+# into this active code window.
+# A function is written called get_related_titles which takes a list
+# of movie titles as input.
+# It gets five related movies for each from TasteDive, extracts
+# the titles for all of them, and combines them all into a single
+# list without including the same movie twice.
+
+import requests_with_caching
+import json
+
+def get_movies_from_tastedive(str_input):
+    # A TasteDive query is set and related movie results are returned.
+    page = requests_with_caching.get(
+        "https://tastedive.com/api/similar",
+        params={"q": str_input, "type": "movies", "limit": 5})
+    py_rec = json.loads(page.text)
+    return py_rec
+
+def extract_movie_titles(dict_input):
+    # Up to five TasteDive query results are stored in a list.
+    names_lst = []
+    for nam in dict_input["Similar"]["Results"]:
+        names_lst.append(nam["Name"])
+    print(names_lst[:5])
+    return names_lst[:5]
+
+def get_related_titles(lst_movies):
+    # Related titles from a list of movies are combined into a
+    # single list without including the same movie twice.
+    ret_lst = []
+    extracted_lst = []
+    for item in lst_movies:
+        extracted_lst = extract_movie_titles(
+            get_movies_from_tastedive(item))
+        for movie in extracted_lst:
+            if movie not in ret_lst:
+                ret_lst.append(movie)
+    return ret_lst
+
+# get_related_titles(["Black Panther", "Captain Marvel"])
+extract_movie_titles(get_movies_from_tastedive("Black Panther"))
+
+# 4
+# Data is fetched from OMDB; the API's documentation is at
+# https://www.omdbapi.com/
+# Therefore a function called get_movie_data is defined which takes
+# in one parameter which is a string that should represent the
+# title of a movie to be searched. The function returns a
+# dictionary with information about that movie.
+#
+# The function requests_with_catching.get() is used. In that way
+# queries on movies that are already in the cache can be done
+# without an api key. The keys t and r are used to fetch data.
+
+import requests_with_caching
+import json
+
+def get_movie_data(str_input):
+    # A dictionary with rating information about as movie is fetched
+    # from the OMDB API.
+    page = requests_with_caching.get("http://www.omdbapi.com/",
+    params={"t":str_input, "r":"json"})
+    py_rec = json.loads(page.text)
+    return py_rec
+
+get_movie_data("Baby Mama")
+# get_movie_data("Venom")
