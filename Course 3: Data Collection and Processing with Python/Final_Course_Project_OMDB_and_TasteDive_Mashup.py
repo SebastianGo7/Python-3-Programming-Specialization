@@ -161,3 +161,142 @@ def get_movie_data(str_input):
 
 get_movie_data("Baby Mama")
 # get_movie_data("Venom")
+
+# 5
+# The completed function from above is copied into the following
+# code window. A function called get_movie_rating, which takes an
+# OMDB dictionary result for one movie and extracts the
+# Rotten Tomatoes rating as an integer.
+# For example, if given the OMDB dictionary for “Black Panther”,
+# it would return 97. If there is no Rotten Tomatoes rating,
+# 0 is returned.
+
+import requests_with_caching
+import json
+
+def get_movie_data(str_input):
+    # A dictionary with rating information about as movie is fetched
+    # from the OMDB API.
+    page = requests_with_caching.get("http://www.omdbapi.com/",
+    params={"t":str_input, "r":"json"})
+    py_rec = json.loads(page.text)
+    return py_rec
+
+def get_movie_rating(dict_input):
+    # The Rotten Tomatoes rating is returned as an integer getting a
+    # dictionary input; 0 is returned if there is no rating.
+    rating = 0
+    for counter in range(len(dict_input['Ratings'])):
+        if dict_input['Ratings'][counter][
+            "Source"] == "Rotten Tomatoes":
+            return int(dict_input['Ratings'][1]["Value"][0:2])
+    else:
+        return 0
+
+get_movie_rating(get_movie_data("Deadpool 2"))
+
+# 6
+# The functions are put together here. A function
+# get_sorted_recommendations is defined which takes a list of movie
+# titles as an input. A sorted list of up to five related
+# movie titles for each input title is returned as output.
+# The movies are sorted in descending order by their Rotten Tomatoes
+# rating, as returned by the get_movie_rating function. The ties
+# between output movies are broken in reverse alphabetic order.
+
+
+import requests_with_caching
+import json
+
+def get_movies_from_tastedive(str_input):
+    # A TasteDive query is set and related movie results are returned.
+    page = requests_with_caching.get("https://tastedive.com/api/similar",
+                                     params={"q": str_input,
+                                             "type": "movies", "limit": 5})
+    py_rec = json.loads(page.text)
+    return py_rec
+
+def extract_movie_titles(dict_input):
+    # Up to five TasteDive query results are stored in a list.
+    names_lst = []
+    for nam in dict_input["Similar"]["Results"]:
+        names_lst.append(nam["Name"])
+    return names_lst[:5]
+
+def get_related_titles(lst_movies):
+    # Related titles from a list of movies are combined into a
+    # single list without including the same movie twice.
+    ret_lst = []
+    extracted_lst = []
+    for item in lst_movies:
+        extracted_lst = extract_movie_titles(
+            get_movies_from_tastedive(item))
+        for movie in extracted_lst:
+            if movie not in ret_lst:
+                ret_lst.append(movie)
+    return ret_lst
+
+
+# Extract_movie_titles(get_movies_from_tastedive("Black Panther")):
+
+def get_movie_data(str_input):
+    # A dictionary with rating information about as movie is fetched
+    # from the OMDB API.
+    page = requests_with_caching.get("http://www.omdbapi.com/",
+    params={"t":str_input, "r":"json"})
+    py_rec = json.loads(page.text)
+    return py_rec
+
+def get_movie_rating(dict_input):
+    # The Rotten Tomatoes rating is returned as an integer getting a
+    # dictionary input; 0 is returned if there is no rating.
+    rating = 0
+    for counter in range(len(dict_input['Ratings'])):
+        if dict_input['Ratings'][counter]["Source"] == "Rotten Tomatoes":
+            return int(dict_input['Ratings'][1]["Value"][0:2])
+    else:
+        return 0
+
+
+# get_movie_rating(get_movie_data("Deadpool 2"))
+# get_movies_from_tastedive("Bridesmaids")
+
+def get_sorted_recommendations(lst_movie_titles):
+    # A list of movie titles is sorted by the movies' ratings. The
+    # ties between output movies are broken in reverse alphabetical
+    # order.
+
+    lst_first_output = get_related_titles(lst_movie_titles)
+
+    lst_title_and_rating = []
+    for item in lst_first_output:
+        # A list of all relevant movies is created.
+        lst_title_and_rating.append(
+            [item, get_movie_rating(get_movie_data(item))])
+
+    print("--")
+    print(lst_title_and_rating)
+
+    lst_sorted_1 = []
+    lst_sorted_2 = []
+    # The list is sorted by the movies rating.
+    lst_sorted_1 = sorted(lst_title_and_rating, key=(lambda k: -k[1]),
+                          reverse=True)
+
+    for counter in range(len(lst_sorted_1)):
+        # The movie list is resorted to break the ties in reverse
+        # alphabetical order.
+        lst_sorted_2.append(
+            lst_sorted_1[(-counter + len(lst_sorted_1) - 1)])
+    print(lst_sorted_2)
+
+    lst_only_Titles = []
+    for movie in lst_sorted_2:
+        # The titles of the sorted list are appended to a return list
+        lst_only_Titles.append(movie[0])
+
+    return lst_only_Titles
+
+get_sorted_recommendations(["Bridesmaids", "Sherlock Holmes"])
+# get_related_titles(["Black Panther", "Captain Marvel"])
+
