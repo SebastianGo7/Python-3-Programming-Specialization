@@ -45,3 +45,28 @@ class AppleBasket():
                                                   self.apple_color)
 basket_1 = AppleBasket("yellow", 32)
 print(basket_1)
+
+# 3
+# A class called BankAccount is defined that accepts the name you want
+# associated with your bank account in a string, and an integer that
+# represents the amount of money in the account.
+# The constructor initializes two instance variables from those
+# inputs: name and amt.
+# A string method is added so that when you print an instance of
+# BankAccount, "Your account, [name goes here],
+# has [start_amt goes here] dollars." can be seen.
+# An instance of this class with "Bob" as the name and 100 as the
+# amount is created and saved to the variable t1.
+
+class BankAccount:
+    def __init__(self,init_name, init_amount):
+        self.name = init_name
+        self.amt = init_amount
+
+    def __str__(self):
+        format_param = self.name, self.amt
+        return "Your account, {}, has {} dollars.".format(format_param)
+
+t1 = BankAccount("Bob", 10)
+print(t1)
+
